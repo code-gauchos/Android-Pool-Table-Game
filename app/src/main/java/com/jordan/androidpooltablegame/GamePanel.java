@@ -33,6 +33,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread _mainThread;
     private Background _background;
     private Player _player;
+    private PoolBall _oneBall;
+    private PoolBall _twoBall;
+    private PoolBall _threeBall;
+    private PoolBall _fourBall;
+    private PoolBall _fiveBall;
+    private PoolBall _sixBall;
+    private PoolBall _sevenBall;
+    private PoolBall _eightBall;
+    private PoolBall _nineBall;
+    private PoolBall _tenBall;
+    private PoolBall _elevenBall;
+    private PoolBall _twelveBall;
+    private PoolBall _thirteenBall;
+    private PoolBall _fourteenBall;
+    private PoolBall _fifteenBall;
+    private PoolBall _cueBall;
 
     public GamePanel(Context context)
     {
@@ -52,9 +68,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this._background = new Background(BitmapFactory.decodeResource(getResources(),
             R.drawable.pool_table));
 
-        //instantiate the platFort Player
-        this._player = new Player(BitmapFactory.decodeResource(getResources(),
-                R.drawable.one_ball), 71, 129, 1);
+        //instantiate the pool balls
+        instantiatePoolsBalls();
 
         // instantiate a thread object
         _mainThread = new MainThread(getHolder(), this);
@@ -240,4 +255,52 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         return false;
     }
+
+
+    private void instantiatePoolsBalls()
+    {
+        this._oneBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.one_ball), 71, 129, 1);
+
+        this._twoBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.two_ball), 71, 129, 1);
+        this._threeBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.three_ball), 71, 129, 1);
+
+        this._fourBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.four_ball), 71, 129, 1);
+        this._fiveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.five_ball), 71, 129, 1);
+
+        this._sixBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.six_ball), 71, 129, 1);
+        this._sevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.seven_ball), 71, 129, 1);
+
+        this._eightBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.eight_ball), 71, 129, 1);
+        this._nineBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.nine_ball), 71, 129, 1);
+
+//        this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+//                R.drawable.ten_ball), 71, 129, 1);
+
+        this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.eleven_ball), 71, 129, 1);
+
+        this._twelveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.twelve_ball), 71, 129, 1);
+        this._thirteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.thirteen_poolball), 71, 129, 1);
+
+        this._fourteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.fourteen_ball), 71, 129, 1);
+
+        this._fifteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.fifteen_ball), 71, 129, 1);
+
+        this._player = new Player(BitmapFactory.decodeResource(getResources(),
+                R.drawable.one_ball), 71, 129, 1);
+    }
+
 }
