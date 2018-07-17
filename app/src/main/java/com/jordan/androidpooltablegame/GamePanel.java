@@ -20,9 +20,9 @@ import java.util.Random;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
     // this is the width of the background image
-    public static final int BACKGROUND_IMAGE_WIDTH = 800;
+    public static final int BACKGROUND_IMAGE_WIDTH = 500;
     // this is the height of the background image
-    public static final int BACKGROUND_IMAGE_HEIGHT = 400;
+    public static final int BACKGROUND_IMAGE_HEIGHT = 320;
     private long _startGameResetTime;
     private boolean _isGameReset;
     private boolean _isPlayerHidden;
