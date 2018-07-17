@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 
 // Player will only move up and down, not left/right
 // background image will scroll
-public class Player extends GameObject
+public class PoolBall extends GameObject
 {
     private int score;
     private boolean _isUp;
@@ -15,7 +15,7 @@ public class Player extends GameObject
 
     // width of individual frame in bitmap image.  so if there are 3 helos
     // in the image, you need to measure w/h of the individual frame
-    public Player(Bitmap bitmap, int frameWidth, int frameHeight, int numFrames)
+    public PoolBall(Bitmap bitmap, int frameWidth, int frameHeight, int numFrames)
     {
         this.initialize(bitmap, frameWidth, frameHeight, numFrames);
     }

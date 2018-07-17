@@ -20,12 +20,9 @@ import java.util.Random;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
     // this is the width of the background image
-    public static final int BACKGROUND_IMAGE_WIDTH = 831;
+    public static final int BACKGROUND_IMAGE_WIDTH = 800;
     // this is the height of the background image
-    public static final int BACKGROUND_IMAGE_HEIGHT = 495;
-    public static final int MOVE_SPEED = -5;
-    private long smokeStartTimer;
-    private long _missileStartTime;
+    public static final int BACKGROUND_IMAGE_HEIGHT = 400;
     private long _startGameResetTime;
     private boolean _isGameReset;
     private boolean _isPlayerHidden;
@@ -36,7 +33,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private MainThread _mainThread;
     private Background _background;
     private Player _player;
-    private Random random = new Random();
 
     public GamePanel(Context context)
     {
@@ -54,11 +50,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         // pass in the background image of the game
         this._background = new Background(BitmapFactory.decodeResource(getResources(),
-                R.drawable.gas_stop));
+            R.drawable.pool_table));
 
         //instantiate the platFort Player
         this._player = new Player(BitmapFactory.decodeResource(getResources(),
-                R.drawable.dark_voyager), 71, 129, 1);
+                R.drawable.one_ball), 71, 129, 1);
 
         // instantiate a thread object
         _mainThread = new MainThread(getHolder(), this);
@@ -179,9 +175,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         final float scaleFactorY = getHeight() / (BACKGROUND_IMAGE_HEIGHT * 1.f);
 
         if (canvas != null) {
-            final int savedState = canvas.save();
-
-            canvas.scale(scaleFactorX, scaleFactorY);
+//            final int savedState = canvas.save();
+//
+//            canvas.scale(scaleFactorX, scaleFactorY);
 
             this._background.draw(canvas);
 
@@ -191,7 +187,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             drawText(canvas);
 
-            canvas.restoreToCount(savedState);
+//            canvas.restoreToCount(savedState);
         }
     }
 

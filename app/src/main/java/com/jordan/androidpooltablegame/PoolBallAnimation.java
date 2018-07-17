@@ -2,7 +2,7 @@ package com.jordan.androidpooltablegame;
 
 import android.graphics.Bitmap;
 
-public class PlayerAnimation
+public class PoolBallAnimation
 {
     private Bitmap[] _frames;
     private int _currentFrame;
