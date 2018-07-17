@@ -20,9 +20,15 @@ import java.util.Random;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
     // this is the width of the background image
+<<<<<<< Updated upstream
     public static final int BACKGROUND_IMAGE_WIDTH = 500;
     // this is the height of the background image
     public static final int BACKGROUND_IMAGE_HEIGHT = 320;
+=======
+    public static final int BACKGROUND_IMAGE_WIDTH = 927;
+    // this is the height of the background image
+    public static final int BACKGROUND_IMAGE_HEIGHT = 482;
+>>>>>>> Stashed changes
     private long _startGameResetTime;
     private boolean _isGameReset;
     private boolean _isPlayerHidden;
@@ -260,12 +266,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private void instantiatePoolsBalls()
     {
         this._oneBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.one_ball), 71, 129, 1);
+                R.drawable.one_ball), 106, 105, 1);
 
         this._twoBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.two_ball), 71, 129, 1);
+                R.drawable.two_ball), 94, 94, 1);
         this._threeBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.three_ball), 71, 129, 1);
+                R.drawable.three_ball), 102, 100, 1);
 
         this._fourBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.four_ball), 71, 129, 1);
@@ -286,7 +292,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 //                R.drawable.ten_ball), 71, 129, 1);
 
         this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.eleven_ball), 71, 129, 1);
+                R.drawable.eleven_ball), 75, 78, 1);
 
         this._twelveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.twelve_ball), 71, 129, 1);
