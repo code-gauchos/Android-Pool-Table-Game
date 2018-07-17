@@ -260,44 +260,44 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private void instantiatePoolsBalls()
     {
         this._oneBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.one_ball), 71, 129, 1);
+                R.drawable.one_ball), "@strings/one_ball", 71, 129, 1);
 
         this._twoBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.two_ball), 71, 129, 1);
+                R.drawable.two_ball), "@strings/two_ball", 71, 129, 1);
         this._threeBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.three_ball), 71, 129, 1);
+                R.drawable.three_ball), "@strings/three_ball", 71, 129, 1);
 
         this._fourBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.four_ball), 71, 129, 1);
+                R.drawable.four_ball), "@strings/four_ball", 71, 129, 1);
         this._fiveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.five_ball), 71, 129, 1);
+                R.drawable.five_ball), "@strings/five_ball", 71, 129, 1);
 
         this._sixBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.six_ball), 71, 129, 1);
+                R.drawable.six_ball), "@strings/six_ball", 71, 129, 1);
         this._sevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.seven_ball), 71, 129, 1);
+                R.drawable.seven_ball), "@strings/seven_ball", 71, 129, 1);
 
         this._eightBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.eight_ball), 71, 129, 1);
+                R.drawable.eight_ball), "@strings/eight_ball", 71, 129, 1);
         this._nineBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.nine_ball), 71, 129, 1);
+                R.drawable.nine_ball), "@strings/nine_ball", 71, 129, 1);
 
-//        this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+//        this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(), "@strings/ten_ball",
 //                R.drawable.ten_ball), 71, 129, 1);
 
         this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.eleven_ball), 71, 129, 1);
+                R.drawable.eleven_ball), "@strings/eleven_ball", 71, 129, 1);
 
         this._twelveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.twelve_ball), 71, 129, 1);
+                R.drawable.twelve_ball), "@strings/twelve_ball", 71, 129, 1);
         this._thirteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.thirteen_ball), 71, 129, 1);
+                R.drawable.thirteen_ball), "@strings/thirteen_ball", 71, 129, 1);
 
         this._fourteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.fourteen_ball), 71, 129, 1);
+                R.drawable.fourteen_ball), "@strings/fourteen_ball", 71, 129, 1);
 
         this._fifteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.fifteen_ball), 71, 129, 1);
+                R.drawable.fifteen_ball), "@strings/fifteen_ball", 71, 129, 1);
 
         this._player = new Player(BitmapFactory.decodeResource(getResources(),
                 R.drawable.one_ball), 71, 129, 1);

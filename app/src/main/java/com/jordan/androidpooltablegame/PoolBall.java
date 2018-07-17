@@ -3,8 +3,7 @@ package com.jordan.androidpooltablegame;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-// Player will only move up and down, not left/right
-// background image will scroll
+// Billiard ball will in all directions
 public class PoolBall extends GameObject
 {
     private int score;
@@ -15,16 +14,19 @@ public class PoolBall extends GameObject
 
     // width of individual frame in bitmap image.  so if there are 3 helos
     // in the image, you need to measure w/h of the individual frame
-    public PoolBall(Bitmap bitmap, int frameWidth, int frameHeight, int numFrames)
+    public PoolBall(Bitmap bitmap, String bitmapName, int frameWidth, int frameHeight,
+                    int numFrames)
     {
-        this.initialize(bitmap, frameWidth, frameHeight, numFrames);
+        this.initialize(bitmap, bitmapName, frameWidth, frameHeight, numFrames);
     }
 
-    private void initialize(Bitmap spriteSheet, int frameWidth, int frameHeight, int numFrames)
+    private void initialize(Bitmap spriteSheet, String bitmapName, int frameWidth, int frameHeight,
+                            int numFrames)
     {
-        this.name = "Dark Voyager";
-        this.x = 100;
-        this.y = GamePanel.BACKGROUND_IMAGE_HEIGHT / 2;
+        this.name = bitmapName;
+
+        setPoolBallLocation(bitmapName);
+
         dy = 0;
         score = 0;
 
@@ -32,7 +34,8 @@ public class PoolBall extends GameObject
         // the image could have three frames of the same image
         Bitmap[] images = new Bitmap[numFrames];
 
-        for (int imageCounter = 0; imageCounter < images.length; imageCounter++) {
+        for (int imageCounter = 0; imageCounter < images.length; imageCounter++)
+        {
             // dividing the image by frame.  will create illusion
             //of animation
             images[imageCounter] = Bitmap.createBitmap(spriteSheet, imageCounter * frameWidth, 0, frameWidth, frameHeight);
@@ -41,6 +44,24 @@ public class PoolBall extends GameObject
         animation.setFrames(images);
         animation.setDelay(10);
         startTime = System.nanoTime();
+    }
+
+    private void setPoolBallLocation(String bitmapName)
+    {
+        switch (bitmapName)
+        {
+            case "@string/cue_ball":
+            {
+                this.x = 350;
+                this.y = 100;
+                break;
+            }
+            case "@string/one_ball":
+            {
+                this.x = 100;
+                this.y = 100;
+            }
+        }
     }
 
     public void setIsUp(boolean isUp)
@@ -55,7 +76,8 @@ public class PoolBall extends GameObject
     {
         long elapsed = (System.nanoTime() - startTime) / 1000000;
 
-        if (elapsed > 100) {
+        if (elapsed > 100)
+        {
             score++;
 
             startTime = System.nanoTime();
@@ -68,31 +90,37 @@ public class PoolBall extends GameObject
 
     private void setVerticalVelocity()
     {
-        if (_isUp) {
+        if (_isUp)
+        {
             dy -= 3.1;
 
         }
-        else {
+        else
+        {
             dy += 1.1;
         }
 
         // caps the speed? height?
-        if (dy > 8) {
+        if (dy > 8)
+        {
             dy = 8;
         }
-        if (dy < -15) {
+        if (dy < -15)
+        {
             dy = -15;
         }
 
         this.y += dy * 2;
 
         //set floor
-        if (this.y > 350) {
+        if (this.y > 350)
+        {
             this.y = 350;
         }
 
         // set ceiling
-        if (this.y < -120) {
+        if (this.y < -120)
+        {
             this.y = 0;
         }
     }

@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Android pool table game</string>
+    <string name="one_ball">One Ball</string>
+    <string name="two_ball">Two Ball</string>
+    <string name="three_ball">Three Ball</string>
+    <string name="four_ball">Four Ball</string>
+    <string name="five_ball">Five Ball</string>
+    <string name="six_ball">Six Ball</string>
+    <string name="seven_ball">Seven Ball</string>
+    <string name="eight_ball">Eight Ball</string>
+    <string name="nine_ball">Nine Ball</string>
+    <string name="ten_ball">Ten Ball</string>
+    <string name="eleven_ball">Eleven Ball</string>
+    <string name="twelve_ball">Twelve Ball</string>
+    <string name="thirteen_ball">Thirteen Ball</string>
+    <string name="fourteen_ball">Fourteen Ball</string>
+    <string name="fifteen_ball">Fifteen Ball</string>
+    <string name="cue_ball">Cue Ball</string>
 </resources>
