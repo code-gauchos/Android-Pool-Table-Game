@@ -1,5 +1,6 @@
 package com.jordan.androidpooltablegame;
 
+import android.content.res.Resources;
 import android.graphics.Rect;
 
 public abstract class GameObject

@@ -1,5 +1,6 @@
 package com.jordan.androidpooltablegame;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
@@ -14,18 +15,24 @@ public class PoolBall extends GameObject
 
     // width of individual frame in bitmap image.  so if there are 3 helos
     // in the image, you need to measure w/h of the individual frame
-    public PoolBall(Bitmap bitmap, String bitmapName, int frameWidth, int frameHeight,
+    public PoolBall(Bitmap bitmap, Resources projectResources, int bitmapNameIndex, int frameWidth,
+                    int frameHeight,
                     int numFrames)
     {
-        this.initialize(bitmap, bitmapName, frameWidth, frameHeight, numFrames);
+        this.initialize(bitmap, projectResources, bitmapNameIndex, frameWidth, frameHeight, numFrames);
     }
 
-    private void initialize(Bitmap spriteSheet, String bitmapName, int frameWidth, int frameHeight,
+    private void initialize(Bitmap spriteSheet, Resources projectResources, int bitmapNameIndex,
+                            int frameWidth,
+                            int frameHeight,
                             int numFrames)
     {
-        this.name = bitmapName;
+        System.out.println("In PoolBall - initialize(), pool ball name: " +
+                projectResources.getString(bitmapNameIndex));
 
-        setPoolBallLocation(bitmapName);
+        this.name = projectResources.getString(bitmapNameIndex);
+
+        setPoolBallLocation(bitmapNameIndex);
 
         dy = 0;
         score = 0;
@@ -46,18 +53,92 @@ public class PoolBall extends GameObject
         startTime = System.nanoTime();
     }
 
-    private void setPoolBallLocation(String bitmapName)
+    private void setPoolBallLocation(int bitmapNameIndex)
     {
-        switch (bitmapName)
+        switch (bitmapNameIndex)
         {
-            case "@string/cue_ball":
+            case R.string.cue_ball:
             {
+                System.out.println("In PoolBall - setPoolBallLocation(), cue ball.  ");
+
                 this.x = 350;
                 this.y = 100;
                 break;
             }
-            case "@string/one_ball":
+            case R.string.one_ball:
             {
+                System.out.println("In PoolBall - setPoolBallLocation(), one ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.two_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), two ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.three_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), three ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.four_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), four ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.five_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), five ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.six_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), six ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.seven_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), seven ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.eight_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), eight ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.nine_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), nine ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.ten_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), ten ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.eleven_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), eleven ball.  ");
+
                 this.x = 100;
                 this.y = 100;
             }
