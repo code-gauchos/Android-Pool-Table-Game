@@ -124,12 +124,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                     this._isNewGameCreated == true &&
                     this._isGameReset == true)
             {
-                System.out.println("In GamePanel - onTouchEvent(), app determined we're starting" +
-                        " a new game.  ");
+                System.out.println("In GamePanel - onTouchEvent(), app determined: ACTION_DOWN. " +
+                        "we're starting a new game.  ");
 
                 this._player.setIsPlaying(true);
 
                 this._player.setIsUp(true);
+
+                this._cueBall.setIsCueStruck(true);
             }
             else
             {
@@ -149,6 +151,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 this._isGameReset = false;
 
                 this._player.setIsUp(true);
+
+                this._cueBall.setIsCueStruck(true);
             }
 
             return true;
@@ -157,8 +161,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         // releasing your finger from the phone
         if (touchEvent.getAction() == MotionEvent.ACTION_UP)
         {
+            System.out.println("In GamePanel - onTouchEvent(), app determined: ACTION_UP. " +
+                    "player has lifted finger off screen.  ");
 
             this._player.setIsUp(false);
+
+            this._cueBall.setIsCueStruck(false);
 
             return true;
         }
@@ -320,54 +328,62 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             this._twoBall.update();
         }
+
         if (this._threeBall.getIsInPocket() == false)
         {
             this._threeBall.update();
         }
+
         if (this._fourBall.getIsInPocket() == false)
         {
             this._fourBall.update();
         }
+
         if (this._fiveBall.getIsInPocket() == false)
         {
             this._fiveBall.update();
         }
+
         if (this._sixBall.getIsInPocket() == false)
         {
             this._sevenBall.update();
         }
+
         if (this._eightBall.getIsInPocket() == false)
         {
             this._eightBall.update();
         }
+
         if (this._nineBall.getIsInPocket() == false)
         {
             this._nineBall.update();
         }
-        if (this._tenBall.getIsInPocket() == false)
-        {
-            this._tenBall.update();
-        }
-        if (this._elevenBall.getIsInPocket() == false)
-        {
-            this._elevenBall.update();
-        }
-        if (this._twelveBall.getIsInPocket() == false)
-        {
-            this._twelveBall.update();
-        }
-        if (this._thirteenBall.getIsInPocket() == false)
-        {
-            this._thirteenBall.update();
-        }
-        if (this._fourteenBall.getIsInPocket() == false)
-        {
-            this._fourteenBall.update();
-        }
-        if (this._fifteenBall.getIsInPocket() == false)
-        {
-            this._fifteenBall.update();
-        }
+
+        //todo: fix null reference here
+//        if (this._tenBall.getIsInPocket() == false)
+//        {
+//            this._tenBall.update();
+//        }
+//        if (this._elevenBall.getIsInPocket() == false)
+//        {
+//            this._elevenBall.update();
+//        }
+//        if (this._twelveBall.getIsInPocket() == false)
+//        {
+//            this._twelveBall.update();
+//        }
+//        if (this._thirteenBall.getIsInPocket() == false)
+//        {
+//            this._thirteenBall.update();
+//        }
+//        if (this._fourteenBall.getIsInPocket() == false)
+//        {
+//            this._fourteenBall.update();
+//        }
+//        if (this._fifteenBall.getIsInPocket() == false)
+//        {
+//            this._fifteenBall.update();
+//        }
         if (this._cueBall.getIsInPocket() == false)
         {
             this._cueBall.update();

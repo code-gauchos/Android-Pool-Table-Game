@@ -8,7 +8,7 @@ import android.graphics.Canvas;
 public class PoolBall extends GameObject
 {
     private int score;
-    private boolean _isUp;
+    private boolean _isCueStruck;
     private boolean _isInPocket;
     private PoolBallAnimation animation = new PoolBallAnimation();
     private long startTime;
@@ -146,9 +146,9 @@ public class PoolBall extends GameObject
         }
     }
 
-    public void setIsUp(boolean isUp)
+    public void setIsCueStruck(boolean isCueStruck)
     {
-        _isUp = isUp;
+        _isCueStruck = isCueStruck;
     }
 
     // implement scoring here
@@ -174,7 +174,7 @@ public class PoolBall extends GameObject
 
     private void setHorizontalVelocity()
     {
-        if (_isUp)
+        if (_isCueStruck == true)
         {
             dx -= 3.1;
 
@@ -211,7 +211,7 @@ public class PoolBall extends GameObject
 
     private void setVerticalVelocity()
     {
-        if (_isUp)
+        if (_isCueStruck == true)
         {
             dy -= 3.1;
 
