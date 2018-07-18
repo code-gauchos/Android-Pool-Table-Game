@@ -34,6 +34,7 @@ public class PoolBall extends GameObject
 
         setPoolBallLocation(bitmapNameIndex);
 
+        dx = 0;
         dy = 0;
         score = 0;
 
@@ -175,36 +176,36 @@ public class PoolBall extends GameObject
     {
         if (_isUp)
         {
-            dy -= 3.1;
+            dx -= 3.1;
 
         }
         else
         {
-            dy += 1.1;
+            dx += 1.1;
         }
 
         // caps the speed? height?
-        if (dy > 8)
+        if (dx > 8)
         {
-            dy = 8;
+            dx = 8;
         }
-        if (dy < -15)
+        if (dx < -15)
         {
-            dy = -15;
+            dx = -15;
         }
 
-        this.y += dy * 2;
+        this.x += dx * 2;
 
         //set floor
-        if (this.y > 350)
+        if (this.x > 350)
         {
-            this.y = 350;
+            this.x = 350;
         }
 
         // set ceiling
-        if (this.y < -120)
+        if (this.x < -120)
         {
-            this.y = 0;
+            this.x = 0;
         }
     }
 
