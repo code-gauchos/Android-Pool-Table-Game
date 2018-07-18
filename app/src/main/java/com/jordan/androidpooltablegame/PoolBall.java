@@ -9,7 +9,7 @@ public class PoolBall extends GameObject
 {
     private int score;
     private boolean _isUp;
-    private boolean _isPlaying;
+    private boolean _isInPocket;
     private PoolBallAnimation animation = new PoolBallAnimation();
     private long startTime;
 
@@ -256,19 +256,20 @@ public class PoolBall extends GameObject
         return score;
     }
 
-    public boolean getIsPlaying()
+    public boolean getIsInPocket()
     {
-        return _isPlaying;
+        return _isInPocket;
     }
 
-    public void setIsPlaying(boolean isPlaying)
+    public void setIsInPocket(boolean isInPocket)
     {
-        this._isPlaying = isPlaying;
+        this._isInPocket = isInPocket;
     }
 
-    public void resetDY()
+    public void resetVelocities()
     {
         dy = 0;
+        dx = 0;
     }
 
     public void resetScore()
