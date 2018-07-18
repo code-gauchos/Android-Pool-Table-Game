@@ -3,7 +3,8 @@ package com.jordan.androidpooltablegame;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class MainThread extends Thread {
+public class MainThread extends Thread
+{
     private int FPS = 30;
     private double averageFPS;
     private SurfaceHolder _surfaceHolder;
@@ -11,14 +12,16 @@ public class MainThread extends Thread {
     private boolean isRunning;
     public static Canvas canvas;
 
-    public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel) {
+    public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel)
+    {
         this._surfaceHolder = surfaceHolder;
         this._gamePanel = gamePanel;
 
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
         long startTime;
         long timeMillis;
         long waitTime;
@@ -26,25 +29,38 @@ public class MainThread extends Thread {
         int frameCount = 0;
         long targetTime = 1000 / FPS;
 
-        while (isRunning) {
+        while (isRunning)
+        {
             startTime = System.nanoTime();
             canvas = null;
 
             // try locking the canvas for pixel editing
-            try {
+            try
+            {
                 canvas = this._surfaceHolder.lockCanvas();
 
-                synchronized (_surfaceHolder) {
+                synchronized (_surfaceHolder)
+                {
+
                     this._gamePanel.update();
+
                     this._gamePanel.draw(canvas);
                 }
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
 
-            }finally {
-                if(canvas != null){
-                    try{
+            }
+            finally
+            {
+                if (canvas != null)
+                {
+                    try
+                    {
                         _surfaceHolder.unlockCanvasAndPost(canvas);
-                    }catch (Exception ex){
+                    }
+                    catch (Exception ex)
+                    {
                         ex.printStackTrace();
                     }
                 }
@@ -54,28 +70,33 @@ public class MainThread extends Thread {
 
             waitTime = targetTime - timeMillis;
 
-            try {
+            try
+            {
                 this.sleep(waitTime);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
             }
 
             totalTime += System.nanoTime() - startTime;
 
             frameCount++;
 
-            if (frameCount == FPS) {
+            if (frameCount == FPS)
+            {
                 averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
 
                 totalTime = 0;
 
                 frameCount = 0;
 
-                System.out.println("Average FPS: " + averageFPS);
+//                System.out.println("Average FPS: " + averageFPS);
             }
         }
     }
 
-    public void setRunning(boolean running) {
+    public void setRunning(boolean running)
+    {
         this.isRunning = running;
     }
 }
