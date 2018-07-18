@@ -1,10 +1,10 @@
 package com.jordan.androidpooltablegame;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-// Player will only move up and down, not left/right
-// background image will scroll
+// Billiard ball will in all directions
 public class PoolBall extends GameObject
 {
     private int score;
@@ -15,16 +15,26 @@ public class PoolBall extends GameObject
 
     // width of individual frame in bitmap image.  so if there are 3 helos
     // in the image, you need to measure w/h of the individual frame
-    public PoolBall(Bitmap bitmap, int frameWidth, int frameHeight, int numFrames)
+    public PoolBall(Bitmap bitmap, Resources projectResources, int bitmapNameIndex, int frameWidth,
+                    int frameHeight,
+                    int numFrames)
     {
-        this.initialize(bitmap, frameWidth, frameHeight, numFrames);
+        this.initialize(bitmap, projectResources, bitmapNameIndex, frameWidth, frameHeight, numFrames);
     }
 
-    private void initialize(Bitmap spriteSheet, int frameWidth, int frameHeight, int numFrames)
+    private void initialize(Bitmap spriteSheet, Resources projectResources, int bitmapNameIndex,
+                            int frameWidth,
+                            int frameHeight,
+                            int numFrames)
     {
-        this.name = "Dark Voyager";
-        this.x = 100;
-        this.y = GamePanel.BACKGROUND_IMAGE_HEIGHT / 2;
+        System.out.println("In PoolBall - initialize(), pool ball name: " +
+                projectResources.getString(bitmapNameIndex));
+
+        this.name = projectResources.getString(bitmapNameIndex);
+
+        setPoolBallLocation(bitmapNameIndex);
+
+        dx = 0;
         dy = 0;
         score = 0;
 
@@ -32,7 +42,8 @@ public class PoolBall extends GameObject
         // the image could have three frames of the same image
         Bitmap[] images = new Bitmap[numFrames];
 
-        for (int imageCounter = 0; imageCounter < images.length; imageCounter++) {
+        for (int imageCounter = 0; imageCounter < images.length; imageCounter++)
+        {
             // dividing the image by frame.  will create illusion
             //of animation
             images[imageCounter] = Bitmap.createBitmap(spriteSheet, imageCounter * frameWidth, 0, frameWidth, frameHeight);
@@ -41,6 +52,98 @@ public class PoolBall extends GameObject
         animation.setFrames(images);
         animation.setDelay(10);
         startTime = System.nanoTime();
+    }
+
+    private void setPoolBallLocation(int bitmapNameIndex)
+    {
+        switch (bitmapNameIndex)
+        {
+            case R.string.cue_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), cue ball.  ");
+
+                this.x = 460;
+                this.y = 100;
+                break;
+            }
+            case R.string.one_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), one ball.  ");
+
+                this.x = 230;
+                this.y = 100;
+            }
+            case R.string.two_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), two ball.  ");
+
+                this.x = 95;
+                this.y = 85;
+            }
+            case R.string.three_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), three ball.  ");
+
+                this.x = 95;
+                this.y = 95;
+            }
+            case R.string.four_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), four ball.  ");
+
+                this.x = 85;
+                this.y = 100;
+            }
+            case R.string.five_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), five ball.  ");
+
+                this.x = 85;
+                this.y = 100;
+            }
+            case R.string.six_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), six ball.  ");
+
+                this.x = 85;
+                this.y = 100;
+            }
+            case R.string.seven_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), seven ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.eight_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), eight ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.nine_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), nine ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.ten_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), ten ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+            case R.string.eleven_ball:
+            {
+                System.out.println("In PoolBall - setPoolBallLocation(), eleven ball.  ");
+
+                this.x = 100;
+                this.y = 100;
+            }
+        }
     }
 
     public void setIsUp(boolean isUp)
@@ -55,8 +158,9 @@ public class PoolBall extends GameObject
     {
         long elapsed = (System.nanoTime() - startTime) / 1000000;
 
-        if (elapsed > 100) {
-            score++;
+        if (elapsed > 100)
+        {
+//            score++;
 
             startTime = System.nanoTime();
         }
@@ -64,35 +168,80 @@ public class PoolBall extends GameObject
         animation.update();
 
         setVerticalVelocity();
+
+        setHorizontalVelocity();
+    }
+
+    private void setHorizontalVelocity()
+    {
+        if (_isUp)
+        {
+            dx -= 3.1;
+
+        }
+        else
+        {
+            dx += 1.1;
+        }
+
+        // caps the speed? height?
+        if (dx > 8)
+        {
+            dx = 8;
+        }
+        if (dx < -15)
+        {
+            dx = -15;
+        }
+
+        this.x += dx * 2;
+
+        //set floor
+        if (this.x > 350)
+        {
+            this.x = 350;
+        }
+
+        // set ceiling
+        if (this.x < -120)
+        {
+            this.x = 0;
+        }
     }
 
     private void setVerticalVelocity()
     {
-        if (_isUp) {
+        if (_isUp)
+        {
             dy -= 3.1;
 
         }
-        else {
+        else
+        {
             dy += 1.1;
         }
 
         // caps the speed? height?
-        if (dy > 8) {
+        if (dy > 8)
+        {
             dy = 8;
         }
-        if (dy < -15) {
+        if (dy < -15)
+        {
             dy = -15;
         }
 
         this.y += dy * 2;
 
         //set floor
-        if (this.y > 350) {
+        if (this.y > 350)
+        {
             this.y = 350;
         }
 
         // set ceiling
-        if (this.y < -120) {
+        if (this.y < -120)
+        {
             this.y = 0;
         }
     }
