@@ -20,15 +20,9 @@ import java.util.Random;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
     // this is the width of the background image
-<<<<<<< Updated upstream
     public static final int BACKGROUND_IMAGE_WIDTH = 500;
     // this is the height of the background image
     public static final int BACKGROUND_IMAGE_HEIGHT = 320;
-=======
-    public static final int BACKGROUND_IMAGE_WIDTH = 927;
-    // this is the height of the background image
-    public static final int BACKGROUND_IMAGE_HEIGHT = 482;
->>>>>>> Stashed changes
     private long _startGameResetTime;
     private boolean _isGameReset;
     private boolean _isPlayerHidden;
@@ -204,6 +198,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             if (this._isPlayerHidden == false) {
                 this._player.draw(canvas);
+                this._cueBall.draw(canvas);
+                this._oneBall.draw(canvas);
+                this._twoBall.draw(canvas);
+                this._threeBall.draw(canvas);
+                this._fourBall.draw(canvas);
+                this._fiveBall.draw(canvas);
+                this._sixBall.draw(canvas);
+                this._sevenBall.draw(canvas);
+                this._eightBall.draw(canvas);
+                this._nineBall.draw(canvas);
+                this._tenBall.draw(canvas);
+                this._elevenBall.draw(canvas);
+                this._twelveBall.draw(canvas);
+                this._thirteenBall.draw(canvas);
+                this._fourteenBall.draw(canvas);
+                this._fifteenBall.draw(canvas);
             }
 
             drawText(canvas);
@@ -229,9 +239,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             paint1.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             canvas.drawText("PRESS TO START", this.BACKGROUND_IMAGE_WIDTH / 2 - 50, this.BACKGROUND_IMAGE_HEIGHT / 2, paint1);
 
-            paint1.setTextSize(20);
-            canvas.drawText("PRESS AND HOLD TO GO UP", this.BACKGROUND_IMAGE_WIDTH / 2 - 50, this.BACKGROUND_IMAGE_HEIGHT / 2 + 20, paint1);
-            canvas.drawText("RELEASE TO GO DOWN", this.BACKGROUND_IMAGE_WIDTH / 2 - 50, this.BACKGROUND_IMAGE_HEIGHT / 2 + 40, paint1);
+//            paint1.setTextSize(20);
+//            canvas.drawText("PRESS AND HOLD TO GO UP", this.BACKGROUND_IMAGE_WIDTH / 2 - 50, this.BACKGROUND_IMAGE_HEIGHT / 2 + 20, paint1);
+//            canvas.drawText("RELEASE TO GO DOWN", this.BACKGROUND_IMAGE_WIDTH / 2 - 50, this.BACKGROUND_IMAGE_HEIGHT / 2 + 40, paint1);
         }
     }
 
@@ -265,46 +275,65 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     private void instantiatePoolsBalls()
     {
+        this._cueBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+                R.drawable.cue_ball), super.getContext().getResources(), R.string.cue_ball,
+                86, 86, 1);
+
         this._oneBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.one_ball), 106, 105, 1);
+                R.drawable.one_ball), super.getContext().getResources(), R.string.one_ball,
+                106, 105, 1);
 
         this._twoBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.two_ball), 94, 94, 1);
+                R.drawable.two_ball), super.getContext().getResources(), R.string.two_ball,
+                94, 94, 1);
         this._threeBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.three_ball), 102, 100, 1);
+                R.drawable.three_ball), super.getContext().getResources(), R.string.three_ball,
+                102, 100, 1);
 
         this._fourBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.four_ball), 98, 95, 1);
+                R.drawable.four_ball), super.getContext().getResources(), R.string.four_ball,
+                98, 95, 1);
         this._fiveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.five_ball), 102, 102, 1);
+                R.drawable.five_ball), super.getContext().getResources(), R.string.five_ball,
+                102, 102, 1);
 
         this._sixBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.six_ball), 104, 103, 1);
+                R.drawable.six_ball), super.getContext().getResources(), R.string.six_ball,
+                104, 103, 1);
         this._sevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.seven_ball), 102, 100, 1);
+                R.drawable.seven_ball), super.getContext().getResources(), R.string.seven_ball,
+                102, 100, 1);
 
         this._eightBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.eight_ball), 102, 75, 1);
+                R.drawable.eight_ball), super.getContext().getResources(), R.string.eight_ball,
+                102, 75, 1);
         this._nineBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.nine_ball), 110, 114, 1);
+                R.drawable.nine_ball), super.getContext().getResources(), R.string.nine_ball,
+                110, 114, 1);
 
 //        this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
 //                R.drawable.ten_ball), 101, 101, 1);
 
         this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.eleven_ball), 99, 99, 1);
+                R.drawable.eleven_ball), super.getContext().getResources(), R.string.eleven_ball,
+                99, 99, 1);
 
         this._twelveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.twelve_ball), 122, 126, 1);
+                R.drawable.twelve_ball), super.getContext().getResources(), R.string.twelve_ball,
+                122, 126, 1);
         this._thirteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.thirteen_ball), 102, 102, 1);
+                R.drawable.thirteen_ball), super.getContext().getResources(), R.string.thirteen_ball,
+                102, 102, 1);
 
         this._fourteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.fourteen_ball), 102, 102, 1);
+                R.drawable.fourteen_ball), super.getContext().getResources(), R.string.fourteen_ball,
+                102, 102, 1);
 
         this._fifteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.fifteen_ball), 101, 105, 1);
+                R.drawable.fifteen_ball), super.getContext().getResources(), R.string.fifteen_ball,
+                101, 105, 1);
 
+        // todo: need to figure out how to start this game
         this._player = new Player(BitmapFactory.decodeResource(getResources(),
                 R.drawable.one_ball), 71, 129, 1);
     }

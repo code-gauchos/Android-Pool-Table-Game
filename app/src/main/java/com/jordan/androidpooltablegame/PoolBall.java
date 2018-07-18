@@ -61,7 +61,7 @@ public class PoolBall extends GameObject
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), cue ball.  ");
 
-                this.x = 350;
+                this.x = 460;
                 this.y = 100;
                 break;
             }
@@ -69,42 +69,42 @@ public class PoolBall extends GameObject
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), one ball.  ");
 
-                this.x = 100;
+                this.x = 230;
                 this.y = 100;
             }
             case R.string.two_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), two ball.  ");
 
-                this.x = 100;
-                this.y = 100;
+                this.x = 95;
+                this.y = 85;
             }
             case R.string.three_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), three ball.  ");
 
-                this.x = 100;
-                this.y = 100;
+                this.x = 95;
+                this.y = 95;
             }
             case R.string.four_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), four ball.  ");
 
-                this.x = 100;
+                this.x = 85;
                 this.y = 100;
             }
             case R.string.five_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), five ball.  ");
 
-                this.x = 100;
+                this.x = 85;
                 this.y = 100;
             }
             case R.string.six_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), six ball.  ");
 
-                this.x = 100;
+                this.x = 85;
                 this.y = 100;
             }
             case R.string.seven_ball:
@@ -159,7 +159,7 @@ public class PoolBall extends GameObject
 
         if (elapsed > 100)
         {
-            score++;
+//            score++;
 
             startTime = System.nanoTime();
         }
@@ -167,6 +167,45 @@ public class PoolBall extends GameObject
         animation.update();
 
         setVerticalVelocity();
+
+        setHorizontalVelocity();
+    }
+
+    private void setHorizontalVelocity()
+    {
+        if (_isUp)
+        {
+            dy -= 3.1;
+
+        }
+        else
+        {
+            dy += 1.1;
+        }
+
+        // caps the speed? height?
+        if (dy > 8)
+        {
+            dy = 8;
+        }
+        if (dy < -15)
+        {
+            dy = -15;
+        }
+
+        this.y += dy * 2;
+
+        //set floor
+        if (this.y > 350)
+        {
+            this.y = 350;
+        }
+
+        // set ceiling
+        if (this.y < -120)
+        {
+            this.y = 0;
+        }
     }
 
     private void setVerticalVelocity()
