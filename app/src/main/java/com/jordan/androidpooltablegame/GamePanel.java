@@ -1,7 +1,6 @@
 package com.jordan.androidpooltablegame;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,9 +20,15 @@ import java.util.Random;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
     // this is the width of the background image
+<<<<<<< Updated upstream
     public static final int BACKGROUND_IMAGE_WIDTH = 500;
     // this is the height of the background image
     public static final int BACKGROUND_IMAGE_HEIGHT = 320;
+=======
+    public static final int BACKGROUND_IMAGE_WIDTH = 927;
+    // this is the height of the background image
+    public static final int BACKGROUND_IMAGE_HEIGHT = 482;
+>>>>>>> Stashed changes
     private long _startGameResetTime;
     private boolean _isGameReset;
     private boolean _isPlayerHidden;
@@ -67,7 +72,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         // pass in the background image of the game
         this._background = new Background(BitmapFactory.decodeResource(getResources(),
-                R.drawable.pool_table));
+            R.drawable.pool_table));
 
         //instantiate the pool balls
         instantiatePoolsBalls();
@@ -92,12 +97,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         boolean retry = true;
         int counter = 0;
 
-        while (retry && counter < 1000)
-        {
+        while (retry && counter < 1000) {
             counter++;
 
-            try
-            {
+            try {
                 this._mainThread.setRunning(false);
                 this._mainThread.join();
 
@@ -107,8 +110,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 retry = false;
 
             }
-            catch (InterruptedException interEx)
-            {
+            catch (InterruptedException interEx) {
                 interEx.printStackTrace();
             }
         }
@@ -119,21 +121,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public boolean onTouchEvent(MotionEvent touchEvent)
     {
         // putting your finger down on the phone
-        if (touchEvent.getAction() == MotionEvent.ACTION_DOWN)
-        {
+        if (touchEvent.getAction() == MotionEvent.ACTION_DOWN) {
             if (this._player.getIsPlaying() == false &&
                     this._isNewGameCreated == true &&
-                    this._isGameReset == true)
-            {
+                    this._isGameReset == true) {
                 this._player.setIsPlaying(true);
 
                 this._player.setIsUp(true);
             }
 
-            if (this._player.getIsPlaying() == true)
-            {
-                if (this._isGameStarted == false)
-                {
+            if (this._player.getIsPlaying() == true) {
+                if (this._isGameStarted == false) {
                     this._isGameStarted = true;
                 }
 
@@ -146,8 +144,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         }
 
         // releasing your finger from the phone
-        if (touchEvent.getAction() == MotionEvent.ACTION_UP)
-        {
+        if (touchEvent.getAction() == MotionEvent.ACTION_UP) {
 
             this._player.setIsUp(false);
 
@@ -160,19 +157,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public void update()
     {
         // update background if player is playing
-        if (this._player.getIsPlaying() == true)
-        {
+        if (this._player.getIsPlaying() == true) {
             this._background.update();
             this._player.update();
         }
-        else
-        {
+        else {
             // the player is not playing; therefore, a missile struck
             // the player.  show an explosion.
             this._player.resetDY();
 
-            if (this._isGameReset == false)
-            {
+            if (this._isGameReset == false) {
                 this._isNewGameCreated = false;
                 this._startGameResetTime = System.nanoTime();
                 this._isGameReset = true;
@@ -181,8 +175,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             long resetElapsed = (System.nanoTime() - this._startGameResetTime) / 1000000;
 
-            if (resetElapsed > 2500 && this._isNewGameCreated == false)
-            {
+            if (resetElapsed > 2500 && this._isNewGameCreated == false) {
                 newGame();
             }
         }
@@ -202,16 +195,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 //getHeight: gives entire height of phone screen
         final float scaleFactorY = getHeight() / (BACKGROUND_IMAGE_HEIGHT * 1.f);
 
-        if (canvas != null)
-        {
+        if (canvas != null) {
 //            final int savedState = canvas.save();
 //
 //            canvas.scale(scaleFactorX, scaleFactorY);
 
             this._background.draw(canvas);
 
-            if (this._isPlayerHidden == false)
-            {
+            if (this._isPlayerHidden == false) {
                 this._player.draw(canvas);
             }
 
@@ -232,8 +223,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         canvas.drawText("BEST: " + this._bestDistance, this.BACKGROUND_IMAGE_WIDTH - 215, this.BACKGROUND_IMAGE_HEIGHT - 10, paint);
 
         if (this._player.getIsPlaying() == false && this._isNewGameCreated == true &&
-                this._isGameReset == true)
-        {
+                this._isGameReset == true) {
             Paint paint1 = new Paint();
             paint1.setTextSize(40);
             paint1.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
@@ -253,8 +243,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this._player.resetScore();
         this._player.setY(this.BACKGROUND_IMAGE_HEIGHT / 2);
 
-        if (this._player.getScore() > this._bestDistance)
-        {
+        if (this._player.getScore() > this._bestDistance) {
             this._bestDistance = this._player.getScore();
 
         }
@@ -264,8 +253,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     public boolean didObjectsCollide(GameObject a, GameObject b)
     {
-        if (Rect.intersects(a.getRectangle(), b.getRectangle()))
-        {
+        if (Rect.intersects(a.getRectangle(), b.getRectangle())) {
             return true;
         }
 
@@ -278,51 +266,47 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private void instantiatePoolsBalls()
     {
         this._oneBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.one_ball), super.getContext().getResources(), R.string.one_ball,
-                83, 83, 1);
+                R.drawable.one_ball), 106, 105, 1);
 
         this._twoBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.two_ball), super.getContext().getResources(), R.string.two_ball, 71, 129, 1);
+                R.drawable.two_ball), 94, 94, 1);
         this._threeBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.three_ball), super.getContext().getResources(), R.string.three_ball, 71, 129, 1);
+                R.drawable.three_ball), 102, 100, 1);
 
         this._fourBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.four_ball), super.getContext().getResources(), R.string.four_ball, 71, 129, 1);
+                R.drawable.four_ball), 98, 95, 1);
         this._fiveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.five_ball), super.getContext().getResources(), R.string.five_ball, 71, 129, 1);
+                R.drawable.five_ball), 102, 102, 1);
 
         this._sixBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.six_ball), super.getContext().getResources(), R.string.six_ball, 71, 129, 1);
+                R.drawable.six_ball), 104, 103, 1);
         this._sevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.seven_ball), super.getContext().getResources(), R.string.seven_ball, 71, 129, 1);
+                R.drawable.seven_ball), 102, 100, 1);
 
         this._eightBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.eight_ball), super.getContext().getResources(), R.string.eight_ball, 71, 129, 1);
+                R.drawable.eight_ball), 102, 75, 1);
         this._nineBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.nine_ball), super.getContext().getResources(), R.string.nine_ball, 71, 129, 1);
+                R.drawable.nine_ball), 110, 114, 1);
 
-//        this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(), R.string.ten_ball",
-//                R.drawable.ten_ball), super.getContext().getResources(), 71, 129, 1);
+//        this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
+//                R.drawable.ten_ball), 101, 101, 1);
 
         this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.eleven_ball), super.getContext().getResources(), R.string.eleven_ball, 71, 129, 1);
+                R.drawable.eleven_ball), 99, 99, 1);
 
         this._twelveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.twelve_ball), super.getContext().getResources(), R.string.twelve_ball, 71, 129, 1);
+                R.drawable.twelve_ball), 122, 126, 1);
         this._thirteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.thirteen_ball), super.getContext().getResources(), R.string.thirteen_ball, 71, 129, 1);
+                R.drawable.thirteen_ball), 102, 102, 1);
 
         this._fourteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.fourteen_ball), super.getContext().getResources(), R.string.fourteen_ball, 71, 129, 1);
+                R.drawable.fourteen_ball), 102, 102, 1);
 
         this._fifteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.fifteen_ball), super.getContext().getResources(), R.string.fifteen_ball, 71, 129, 1);
+                R.drawable.fifteen_ball), 101, 105, 1);
 
-        this._cueBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.cue_ball), super.getContext().getResources(), R.string.cue_ball, 86, 86, 1);
-
-//        this._player = new Player(BitmapFactory.decodeResource(getResources(),
-//                R.drawable.one_ball), super.getContext().getResources(), 71, 129, 1);
+        this._player = new Player(BitmapFactory.decodeResource(getResources(),
+                R.drawable.one_ball), 71, 129, 1);
     }
 
 }
