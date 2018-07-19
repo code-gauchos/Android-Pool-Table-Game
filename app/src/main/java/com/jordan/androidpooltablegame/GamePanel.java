@@ -426,11 +426,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         this._cueBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.cue_ball), super.getContext().getResources(), R.string.cue_ball,
-                86, 86, 1);
+                32, 32, 1);
 
         this._oneBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.one_ball), super.getContext().getResources(), R.string.one_ball,
-                106, 105, 1);
+                32, 32, 1);
 
         this._twoBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.two_ball), super.getContext().getResources(), R.string.two_ball,
