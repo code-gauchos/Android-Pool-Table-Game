@@ -168,7 +168,22 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             this._cueBall.setIsCueStruck(false);
 
+            int magnitude = touchEvent.AXIS_DISTANCE;
+
+            System.out.println("In GamePanel - onTouchEvent(), ACTION_POINTER_DOWN the cue ball " +
+                    "magnitude is" + magnitude);
+
             return true;
+        }
+
+        // during a press gesture, motion contains most recent point, as well as intermediate points
+        // let's capture the beginning and end of the gesture to obtain the vector's magnitude
+        if (touchEvent.getAction() == MotionEvent.ACTION_POINTER_DOWN)
+        {
+            int magnitude = touchEvent.AXIS_DISTANCE;
+
+            System.out.println("In GamePanel - onTouchEvent(), ACTION_POINTER_DOWN the cue ball " +
+                    "magnitude is" + magnitude);
         }
 
         return super.onTouchEvent(touchEvent);
@@ -409,18 +424,151 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this._isNewGameCreated = true;
     }
 
-    public boolean didObjectsCollide(GameObject a, GameObject b)
+    /**
+     * Use this for the initial break
+     * <p>
+     * <p>
+     * Are two stationary circles A and B currently touching?  Two circles are in contact with each
+     * other if and only if the distance between their centers is less than or equal to the sum of
+     * their radii. So, find the distance between the centers of the two circles using the equation:
+     * <p>
+     * DistanceBetweenCenters = SqRoot((ball1.X - ball2.X)^2 + (ball1.Y - ball2.Y)^2)
+     * <p>
+     * Then add the radii of the two circles together. If the sum of the radii is greater than or
+     * equal to DistanceBetweenCenters, then the circles are touching. Since multiplications are
+     * less computationally expensive than square roots, you should speed up this code by not
+     * performing the square root when calculating the distance, and instead square the sum of the
+     * radii.
+     * <p>
+     * https://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=1
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public boolean didBallCollideWithStationaryBall(GameObject a, GameObject b)
     {
-        if (Rect.intersects(a.getRectangle(), b.getRectangle()))
+        // calculate delta X
+        double deltaXSquared = a.getX() - b.getX();
+
+        // square delta X
+        deltaXSquared *= deltaXSquared;
+
+        // calculate delta X
+        double deltaYSquared = a.getY() - b.getY();
+
+        // square delta Y
+        deltaYSquared *= deltaYSquared;
+
+        // Calculate the sum of the radii, then square it
+        double sumRadiiSquared = a.getRadius() + b.getRadius();
+
+        sumRadiiSquared *= sumRadiiSquared;
+
+        if (deltaXSquared + deltaYSquared <= sumRadiiSquared)
         {
+            // a and b are touching
             return true;
         }
 
-//        System.out.println("In didObjectsCollide(), objects did not collide. ");
+        //        System.out.println("In didBallCollideWithStationaryBall(), objects did not collide. ");
 
         return false;
     }
 
+    /**
+     * https://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=2
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public boolean collisionDetection(GameObject a, GameObject b)
+    {
+        // Early Escape test: if the length of the movingBallVector is less
+        // than distance between the centers of these circles minus
+        // their radii, there's no way they can hit.
+        double distanceBetweenCenters = b.distanceBetweenCentersOfBalls(a);
+
+        double sumRadiiOfBalls = (b.getRadius() + a.getRadius());
+
+        distanceBetweenCenters -= sumRadiiOfBalls;
+
+//        if (movingBallVector.getMagnitude() < distanceBetweenCenters)
+//        {
+//            return false;
+//        }
+//
+//        // Normalize the movingBallVector
+//        Vector N = movingBallVector.copy();
+//
+//        N.normalize();
+//
+//        // Find C, the vector from the center of the moving
+//        // circle A to the center of B
+//        Vector C = B.center.minus(A.center);
+//
+//        // D = N . C = ||C|| * cos(angle between N and C)
+//        double D = N.dot(C);
+//
+//        // Another early escape: Make sure that A is moving
+//        // towards B! If the dot product between the movingBallVector and
+//        // B.center - A.center is less that or equal to 0,
+//        // A isn't isn't moving towards B
+//        if (D <= 0)
+//        {
+//            return false;
+//        }
+//
+//        // Find the length of the vector C
+//        double lengthC = C.Magnitude();
+//
+//        double F = (lengthC * lengthC) - (D * D);
+//
+//        // Escape test: if the closest that A will get to B
+//        // is more than the sum of their radii, there's no
+//        // way they are going collide
+//        double sumRadiiSquared = sumRadiiOfBalls * sumRadiiOfBalls;
+//        if (F >= sumRadiiSquared)
+//        {
+//            return false;
+//        }
+//
+//        // We now have F and sumRadii, two sides of a right triangle.
+//        // Use these to find the third side, sqrt(T)
+//        double T = sumRadiiSquared - F;
+//
+//        // If there is no such right triangle with sides length of
+//        // sumRadii and sqrt(f), T will probably be less than 0.
+//        // Better to check now than perform a square root of a
+//        // negative number.
+//        if (T < 0)
+//        {
+//            return false;
+//        }
+//
+//        // Therefore the distance the circle has to travel along
+//        // movingBallVector is D - sqrt(T)
+//        double distance = D - sqrt(T);
+//
+//        // Get the magnitude of the movement vector
+//        double mag = movingBallVector.Magnitude();
+//
+//        // Finally, make sure that the distance A has to move
+//        // to touch B is not greater than the magnitude of the
+//        // movement vector.
+//        if (mag < distance)
+//        {
+//            return false;
+//        }
+//
+//        // Set the length of the movingBallVector so that the circles will just
+//        // touch
+//        movingBallVector.normalize();
+//        movingBallVector.times(distance);
+
+        return true;
+    }
 
     private void instantiatePoolsBalls()
     {
