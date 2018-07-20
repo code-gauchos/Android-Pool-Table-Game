@@ -32,7 +32,8 @@ public class Player extends GameObject
         // the image could have three frames of the same image
         Bitmap[] images = new Bitmap[numFrames];
 
-        for (int imageCounter = 0; imageCounter < images.length; imageCounter++) {
+        for (int imageCounter = 0; imageCounter < images.length; imageCounter++)
+        {
             // dividing the image by frame.  will create illusion
             //of animation
             images[imageCounter] = Bitmap.createBitmap(spriteSheet, imageCounter * frameWidth, 0, frameWidth, frameHeight);
@@ -55,7 +56,8 @@ public class Player extends GameObject
     {
         long elapsed = (System.nanoTime() - startTime) / 1000000;
 
-        if (elapsed > 100) {
+        if (elapsed > 100)
+        {
             score++;
 
             startTime = System.nanoTime();
@@ -68,31 +70,37 @@ public class Player extends GameObject
 
     private void setVerticalVelocity()
     {
-        if (_isUp) {
+        if (_isUp)
+        {
             dy -= 3.1;
 
         }
-        else {
+        else
+        {
             dy += 1.1;
         }
 
         // caps the speed? height?
-        if (dy > 8) {
+        if (dy > 8)
+        {
             dy = 8;
         }
-        if (dy < -15) {
+        if (dy < -15)
+        {
             dy = -15;
         }
 
         this.y += dy * 2;
 
         //set floor
-        if (this.y > 350) {
+        if (this.y > 350)
+        {
             this.y = 350;
         }
 
         // set ceiling
-        if (this.y < -120) {
+        if (this.y < -120)
+        {
             this.y = 0;
         }
     }
@@ -115,11 +123,6 @@ public class Player extends GameObject
     public void setIsPlaying(boolean isPlaying)
     {
         this._isPlaying = isPlaying;
-    }
-
-    public void resetDY()
-    {
-        dy = 0;
     }
 
     public void resetScore()
