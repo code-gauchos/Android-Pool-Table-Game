@@ -609,8 +609,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 32, 34, 1);
 
         this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
-                R.drawable.ten_ball); super.getContext().getResources(), "Ten Ball",
-                 frameWidth: 31, frameHeight: 31, numFrames: 1);
+                R.drawable.ten_ball), super.getContext().getResources(), R.string.ten_ball,
+                 31, 31, 1);
 
         this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.eleven_ball), super.getContext().getResources(), R.string.eleven_ball,
@@ -633,7 +633,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         // todo: need to figure out how to start this game
         this._player = new Player(BitmapFactory.decodeResource(getResources(),
-                R.drawable.one_ball), 71, 129, 1);
+                R.drawable.one_ball), 31, 31, 1);
     }
 
 }
