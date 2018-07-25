@@ -168,11 +168,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             this._cueBall.setIsCueStruck(false);
 
-            int magnitude = touchEvent.AXIS_DISTANCE;
-
-            System.out.println("In GamePanel - onTouchEvent(), ACTION_POINTER_DOWN the cue ball " +
-                    "magnitude is" + magnitude);
-
             return true;
         }
 
@@ -180,10 +175,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         // let's capture the beginning and end of the gesture to obtain the vector's magnitude
         if (touchEvent.getAction() == MotionEvent.ACTION_POINTER_DOWN)
         {
-            int magnitude = touchEvent.AXIS_DISTANCE;
+            //capture the distance that the cue ball covered
+            this._cueBall.setMagnitude(touchEvent.AXIS_DISTANCE);
 
             System.out.println("In GamePanel - onTouchEvent(), ACTION_POINTER_DOWN the cue ball " +
-                    "magnitude is" + magnitude);
+                    "magnitude is" + this._cueBall.getMagnitude());
         }
 
         return super.onTouchEvent(touchEvent);
@@ -320,14 +316,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         this._sevenBall.resetVelocities();
         this._eightBall.resetVelocities();
         this._nineBall.resetVelocities();
-
-        //todo: restore these objects.  must be null reference here
-//        this._tenBall.resetVelocities();
-//        this._elevenBall.resetVelocities();
-//        this._twelveBall.resetVelocities();
-//        this._thirteenBall.resetVelocities();
-//        this._fourteenBall.resetVelocities();
-//        this._fifteenBall.resetVelocities();
+        this._tenBall.resetVelocities();
+        this._elevenBall.resetVelocities();
+        this._twelveBall.resetVelocities();
+        this._thirteenBall.resetVelocities();
+        this._fourteenBall.resetVelocities();
+        this._fifteenBall.resetVelocities();
     }
 
 
@@ -374,31 +368,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             this._nineBall.update();
         }
 
-        //todo: fix null reference here
-//        if (this._tenBall.getIsInPocket() == false)
-//        {
-//            this._tenBall.update();
-//        }
-//        if (this._elevenBall.getIsInPocket() == false)
-//        {
-//            this._elevenBall.update();
-//        }
-//        if (this._twelveBall.getIsInPocket() == false)
-//        {
-//            this._twelveBall.update();
-//        }
-//        if (this._thirteenBall.getIsInPocket() == false)
-//        {
-//            this._thirteenBall.update();
-//        }
-//        if (this._fourteenBall.getIsInPocket() == false)
-//        {
-//            this._fourteenBall.update();
-//        }
-//        if (this._fifteenBall.getIsInPocket() == false)
-//        {
-//            this._fifteenBall.update();
-//        }
+        if (this._tenBall.getIsInPocket() == false)
+        {
+            this._tenBall.update();
+        }
+        if (this._elevenBall.getIsInPocket() == false)
+        {
+            this._elevenBall.update();
+        }
+        if (this._twelveBall.getIsInPocket() == false)
+        {
+            this._twelveBall.update();
+        }
+        if (this._thirteenBall.getIsInPocket() == false)
+        {
+            this._thirteenBall.update();
+        }
+        if (this._fourteenBall.getIsInPocket() == false)
+        {
+            this._fourteenBall.update();
+        }
+        if (this._fifteenBall.getIsInPocket() == false)
+        {
+            this._fifteenBall.update();
+        }
         if (this._cueBall.getIsInPocket() == false)
         {
             this._cueBall.update();
@@ -479,25 +472,25 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     /**
      * https://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=2
      *
-     * @param a
-     * @param b
+     * @param poolBallA
+     * @param poolBallB
      * @return
      */
-    public boolean collisionDetection(GameObject a, GameObject b)
+    public boolean collisionDetection(GameObject poolBallA, GameObject poolBallB)
     {
         // Early Escape test: if the length of the movingBallVector is less
         // than distance between the centers of these circles minus
         // their radii, there's no way they can hit.
-        double distanceBetweenCenters = b.distanceBetweenCentersOfBalls(a);
+        double distanceBetweenCenters = poolBallB.distanceBetweenCentersOfBalls(poolBallA);
 
-        double sumRadiiOfBalls = (b.getRadius() + a.getRadius());
+        double sumRadiiOfBalls = (poolBallB.getRadius() + poolBallA.getRadius());
 
         distanceBetweenCenters -= sumRadiiOfBalls;
 
-//        if (movingBallVector.getMagnitude() < distanceBetweenCenters)
-//        {
-//            return false;
-//        }
+        if (poolBallA.getMagnitude() < distanceBetweenCenters || poolBallB.getMagnitude() < distanceBetweenCenters)
+        {
+            return false;
+        }
 //
 //        // Normalize the movingBallVector
 //        Vector N = movingBallVector.copy();
@@ -610,7 +603,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.ten_ball), super.getContext().getResources(), R.string.ten_ball,
-                 31, 31, 1);
+                31, 31, 1);
 
         this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.eleven_ball), super.getContext().getResources(), R.string.eleven_ball,

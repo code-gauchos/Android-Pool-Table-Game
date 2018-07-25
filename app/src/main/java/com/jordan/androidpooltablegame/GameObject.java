@@ -31,6 +31,8 @@ public abstract class GameObject
 
     private double _radius;
 
+    private double _magnitude;
+
     public int getX()
     {
         return _x;
@@ -101,6 +103,16 @@ public abstract class GameObject
     public void setRadius(double radius)
     {
         this._radius = radius;
+    }
+
+    public double getMagnitude()
+    {
+        return _magnitude;
+    }
+
+    public void setMagnitude(double _magnitude)
+    {
+        this._magnitude = _magnitude;
     }
 
     /**

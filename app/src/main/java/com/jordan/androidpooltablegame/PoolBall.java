@@ -174,6 +174,11 @@ public class PoolBall extends GameObject
         setHorizontalVelocity();
     }
 
+    public void draw(Canvas canvas)
+    {
+        canvas.drawBitmap(animation.getImage(), this.getX(), this.getY(), null);
+    }
+
     private void setHorizontalVelocity()
     {
         if (_isCueStruck == true)
@@ -246,11 +251,6 @@ public class PoolBall extends GameObject
         {
             this.setY(0);
         }
-    }
-
-    public void draw(Canvas canvas)
-    {
-        canvas.drawBitmap(animation.getImage(), this.getX(), this.getY(), null);
     }
 
     public int getScore()
