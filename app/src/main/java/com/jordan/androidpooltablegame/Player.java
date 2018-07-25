@@ -23,8 +23,8 @@ public class Player extends GameObject
     private void initialize(Bitmap spriteSheet, int frameWidth, int frameHeight, int numFrames)
     {
         this.name = "Dark Voyager";
-        this.x = 100;
-        this.y = GamePanel.BACKGROUND_IMAGE_HEIGHT / 2;
+        this.setX(100);
+        this.setY(GamePanel.BACKGROUND_IMAGE_HEIGHT / 2);
         dy = 0;
         score = 0;
 
@@ -64,50 +64,11 @@ public class Player extends GameObject
         }
 
         animation.update();
-
-        setVerticalVelocity();
-    }
-
-    private void setVerticalVelocity()
-    {
-        if (_isUp)
-        {
-            dy -= 3.1;
-
-        }
-        else
-        {
-            dy += 1.1;
-        }
-
-        // caps the speed? height?
-        if (dy > 8)
-        {
-            dy = 8;
-        }
-        if (dy < -15)
-        {
-            dy = -15;
-        }
-
-        this.y += dy * 2;
-
-        //set floor
-        if (this.y > 350)
-        {
-            this.y = 350;
-        }
-
-        // set ceiling
-        if (this.y < -120)
-        {
-            this.y = 0;
-        }
     }
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(animation.getImage(), this.x, this.y, null);
+        canvas.drawBitmap(animation.getImage(), this.getX(), this.getY(), null);
     }
 
     public int getScore()

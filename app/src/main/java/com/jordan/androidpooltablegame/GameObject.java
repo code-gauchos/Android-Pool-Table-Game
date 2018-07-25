@@ -1,39 +1,59 @@
 package com.jordan.androidpooltablegame;
 
-import android.content.res.Resources;
 import android.graphics.Rect;
 
 public abstract class GameObject
 {
-    protected int x;
-    protected int y;
+    /**
+     * point on _x plane
+     */
+    private int _x;
+
+    /**
+     * point on _y plane
+     */
+    private int _y;
+
     protected int dy;
     protected int dx;
+
+    /**
+     * image width
+     */
     protected int width;
+
+    /**
+     * image height
+     */
     protected int height;
+
     protected String name;
+
+    private double _radius;
+
+    private double _magnitude;
 
     public int getX()
     {
-        return x;
+        return _x;
     }
 
     public void setX(int x)
     {
-        this.x = x;
+        this._x = x;
     }
 
     public int getY()
     {
-        return y;
+        return _y;
     }
 
     public void setY(int y)
     {
-        this.y = y;
+        this._y = y;
     }
 
-    // y vector
+    // _y vector
     public int getDy()
     {
         return dy;
@@ -44,7 +64,7 @@ public abstract class GameObject
         this.dy = dy;
     }
 
-    // x vector
+    // _x vector
     public int getDx()
     {
         return dx;
@@ -75,10 +95,46 @@ public abstract class GameObject
         this.height = height;
     }
 
-    public Rect getRectangle()
+    public double getRadius()
     {
-        return new Rect(this.x, this.y, this.x + this.width + 10, this.y +
-                this.height + 10);
+        return _radius;
     }
 
+    public void setRadius(double radius)
+    {
+        this._radius = radius;
+    }
+
+    public double getMagnitude()
+    {
+        return _magnitude;
+    }
+
+    public void setMagnitude(double _magnitude)
+    {
+        this._magnitude = _magnitude;
+    }
+
+    /**
+     * The distance is the hypotenuse of a triangle
+     *
+     * @param otherBall
+     * @return
+     */
+    public double distanceBetweenCentersOfBalls(GameObject otherBall)
+    {
+        // calculate delta X
+        double deltaXSquared = this.getX() - otherBall.getX();
+
+        // square delta X
+        deltaXSquared *= deltaXSquared;
+
+        // calculate delta Y
+        double deltaYSquared = this.getY() - otherBall.getY();
+
+        // square delta Y
+        deltaYSquared *= deltaYSquared;
+
+        return Math.sqrt(deltaXSquared + deltaYSquared);
+    }
 }
