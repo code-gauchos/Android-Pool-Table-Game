@@ -583,39 +583,39 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     {
         this._cueBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.cue_ball), super.getContext().getResources(), R.string.cue_ball,
-                32, 32, 1);
+                31, 26, 1);
 
         this._oneBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.one_ball), super.getContext().getResources(), R.string.one_ball,
-                32, 32, 1);
+                34, 30, 1);
 
         this._twoBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.two_ball), super.getContext().getResources(), R.string.two_ball,
-                32, 32, 1);
+                39, 30, 1);
         this._threeBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.three_ball), super.getContext().getResources(), R.string.three_ball,
-                32, 31, 1);
+                30, 29, 1);
 
         this._fourBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.four_ball), super.getContext().getResources(), R.string.four_ball,
-                32, 31, 1);
+                31, 28, 1);
         this._fiveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.five_ball), super.getContext().getResources(), R.string.five_ball,
-                32, 32, 1);
+                29, 31, 1);
 
         this._sixBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.six_ball), super.getContext().getResources(), R.string.six_ball,
-                32, 32, 1);
+                25, 24, 1);
         this._sevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.seven_ball), super.getContext().getResources(), R.string.seven_ball,
-                32, 31, 1);
+                28, 28, 1);
 
         this._eightBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.eight_ball), super.getContext().getResources(), R.string.eight_ball,
-                34, 25, 1);
+                35, 26, 1);
         this._nineBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.nine_ball), super.getContext().getResources(), R.string.nine_ball,
-                32, 34, 1);
+                32, 32, 1);
 
         this._tenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.ten_ball), super.getContext().getResources(), R.string.ten_ball,
@@ -623,14 +623,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
         this._elevenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.eleven_ball), super.getContext().getResources(), R.string.eleven_ball,
-                33, 33, 1);
+                30, 24, 1);
 
         this._twelveBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.twelve_ball), super.getContext().getResources(), R.string.twelve_ball,
-                32, 33, 1);
+                33, 33, 1);
         this._thirteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.thirteen_ball), super.getContext().getResources(), R.string.thirteen_ball,
-                32, 32, 1);
+                36, 36, 1);
 
         this._fourteenBall = new PoolBall(BitmapFactory.decodeResource(getResources(),
                 R.drawable.fourteen_ball), super.getContext().getResources(), R.string.fourteen_ball,
