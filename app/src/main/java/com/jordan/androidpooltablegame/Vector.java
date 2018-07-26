@@ -1,28 +1,32 @@
 package com.jordan.androidpooltablegame;
 
-public class Vector
+public class Vector extends GameObject
 {
-    private double _magnitude;
-
-    /**
-     * Magnitude is defined as the length of a vector
-     *
-     * The magnitude of a vector can be found by taking the square root of each of the vector
-     * components squared. Using Pythagoras' theorem, calculate:
-     *
-     * |a| = sqrt( x2 + y2 )
-     *
-     * magnitude = |a|
-     *
-     * @return
-     */
-    public double getMagnitude()
+    public Vector()
     {
-        return this._magnitude;
     }
 
-    public Vector copy()
+    public Vector(double startingX, double startingY, double endingX, double endingY)
     {
-        return new Vector();
+        this.setStartingX(startingX);
+        this.setStartingY(startingY);
+        this.setEndingX(endingX);
+        this.setEndingY(endingY);
+    }
+
+    /**
+     * Normalize a vector: Make it's length equal to one
+     */
+    public void normalize()
+    {
+        this.setStartingX((this.getEndingX() - this.getStartingX()) / this.getMagnitude());
+        this.setStartingY((this.getEndingY() - this.getStartingY()) / this.getMagnitude());
+
+        this.setMagnitude(1);
+    }
+
+    public void times(double distance)
+    {
+        this.setMagnitude(this.getMagnitude() * distance);
     }
 }

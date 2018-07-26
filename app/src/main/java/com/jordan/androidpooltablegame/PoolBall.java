@@ -64,86 +64,86 @@ public class PoolBall extends GameObject
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), cue ball.  ");
 
-                this.setX(460);
-                this.setY(100);
+                this.setStartingX(460);
+                this.setStartingY(100);
                 break;
             }
             case R.string.one_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), one ball.  ");
 
-                this.setX(230);
-                this.setY(100);
+                this.setStartingX(230);
+                this.setStartingY(100);
             }
             case R.string.two_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), two ball.  ");
 
-                this.setX(95);
-                this.setY(85);
+                this.setStartingX(95);
+                this.setStartingY(85);
             }
             case R.string.three_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), three ball.  ");
 
-                this.setX(95);
-                this.setY(95);
+                this.setStartingX(95);
+                this.setStartingY(95);
             }
             case R.string.four_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), four ball.  ");
 
-                this.setX(85);
-                this.setY(100);
+                this.setStartingX(85);
+                this.setStartingY(100);
             }
             case R.string.five_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), five ball.  ");
 
-                this.setX(85);
-                this.setY(100);
+                this.setStartingX(85);
+                this.setStartingY(100);
             }
             case R.string.six_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), six ball.  ");
 
-                this.setX(85);
-                this.setY(100);
+                this.setStartingX(85);
+                this.setStartingY(100);
             }
             case R.string.seven_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), seven ball.  ");
 
-                this.setX(100);
-                this.setY(100);
+                this.setStartingX(100);
+                this.setStartingY(100);
             }
             case R.string.eight_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), eight ball.  ");
 
-                this.setX(100);
-                this.setY(100);
+                this.setStartingX(100);
+                this.setStartingY(100);
             }
             case R.string.nine_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), nine ball.  ");
 
-                this.setX(100);
-                this.setY(100);
+                this.setStartingX(100);
+                this.setStartingY(100);
             }
             case R.string.ten_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), ten ball.  ");
 
-                this.setX(100);
-                this.setY(100);
+                this.setStartingX(100);
+                this.setStartingY(100);
             }
             case R.string.eleven_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), eleven ball.  ");
 
-                this.setX(100);
-                this.setY(100);
+                this.setStartingX(100);
+                this.setStartingY(100);
             }
         }
     }
@@ -176,7 +176,7 @@ public class PoolBall extends GameObject
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(animation.getImage(), this.getX(), this.getY(), null);
+        canvas.drawBitmap(animation.getImage(), (float) this.getStartingX(), (float) this.getStartingY(), null);
     }
 
     private void setHorizontalVelocity()
@@ -201,18 +201,18 @@ public class PoolBall extends GameObject
             dx = -15;
         }
 
-        this.setX(this.getX() + dx * 2);
+        this.setStartingX(this.getStartingX() + dx * 2);
 
         //set floor
-        if (this.getX() > 350)
+        if (this.getStartingX() > 350)
         {
-            this.setX(350);
+            this.setStartingX(350);
         }
 
         // set ceiling
-        if (this.getX() < -120)
+        if (this.getStartingX() < -120)
         {
-            this.setX(0);
+            this.setStartingX(0);
         }
     }
 
@@ -238,18 +238,18 @@ public class PoolBall extends GameObject
             dy = -15;
         }
 
-        this.setY(this.getY() + dy * 2);
+        this.setStartingY(this.getStartingY() + dy * 2);
 
         //set floor
-        if (this.getY() > 350)
+        if (this.getStartingY() > 350)
         {
-            this.setY(350);
+            this.setStartingY(350);
         }
 
         // set ceiling
-        if (this.getY() < -120)
+        if (this.getStartingY() < -120)
         {
-            this.setY(0);
+            this.setStartingY(0);
         }
     }
 

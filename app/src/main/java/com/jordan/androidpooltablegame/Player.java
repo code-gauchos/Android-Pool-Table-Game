@@ -23,8 +23,8 @@ public class Player extends GameObject
     private void initialize(Bitmap spriteSheet, int frameWidth, int frameHeight, int numFrames)
     {
         this.name = "Dark Voyager";
-        this.setX(100);
-        this.setY(GamePanel.BACKGROUND_IMAGE_HEIGHT / 2);
+        this.setStartingX(100);
+        this.setStartingY(GamePanel.BACKGROUND_IMAGE_HEIGHT / 2);
         dy = 0;
         score = 0;
 
@@ -68,7 +68,7 @@ public class Player extends GameObject
 
     public void draw(Canvas canvas)
     {
-        canvas.drawBitmap(animation.getImage(), this.getX(), this.getY(), null);
+        canvas.drawBitmap(animation.getImage(), (float) this.getStartingX(), (float) this.getStartingY(), null);
     }
 
     public int getScore()

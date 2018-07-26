@@ -1,18 +1,19 @@
 package com.jordan.androidpooltablegame;
 
-import android.graphics.Rect;
-
 public abstract class GameObject
 {
     /**
-     * point on _x plane
+     * starting point of vector on _startX plane
      */
-    private int _x;
+    private double _startX;
 
+    private double _endX;
     /**
-     * point on _y plane
+     * starting point of vector on _startY plane
      */
-    private int _y;
+    private double _startY;
+
+    private double _endY;
 
     protected int dy;
     protected int dx;
@@ -33,27 +34,27 @@ public abstract class GameObject
 
     private double _magnitude;
 
-    public int getX()
+    public double getStartingX()
     {
-        return _x;
+        return _startX;
     }
 
-    public void setX(int x)
+    public void setStartingX(double x)
     {
-        this._x = x;
+        this._startX = x;
     }
 
-    public int getY()
+    public double getStartingY()
     {
-        return _y;
+        return _startY;
     }
 
-    public void setY(int y)
+    public void setStartingY(double y)
     {
-        this._y = y;
+        this._startY = y;
     }
 
-    // _y vector
+    // _startY vector
     public int getDy()
     {
         return dy;
@@ -64,7 +65,7 @@ public abstract class GameObject
         this.dy = dy;
     }
 
-    // _x vector
+    // _startX vector
     public int getDx()
     {
         return dx;
@@ -105,14 +106,75 @@ public abstract class GameObject
         this._radius = radius;
     }
 
+    /**
+     * Length of a vector
+     *
+     * @return
+     */
     public double getMagnitude()
     {
         return _magnitude;
     }
 
-    public void setMagnitude(double _magnitude)
+    /**
+     * Magnitude is defined as the length of a vector
+     *
+     * The magnitude of a vector can be found by taking the square root of each of the vector
+     * components squared. Using Pythagoras' theorem, calculate:
+     *
+     * |a| = sqrt( x2 + y2 )
+     *
+     * magnitude = |a|
+     *
+     * @return
+     */
+    public void setMagnitude()
     {
-        this._magnitude = _magnitude;
+        // calculate delta X
+        double deltaXSquared = this.getEndingX() - this.getStartingX();
+
+        // square delta X
+        deltaXSquared *= deltaXSquared;
+
+        // calculate delta X
+        double deltaYSquared = this.getEndingY() - this.getStartingY();
+
+        // square delta Y
+        deltaYSquared *= deltaYSquared;
+
+        //this is the hypotenuse
+        this._magnitude = Math.sqrt(deltaXSquared + deltaYSquared);
+    }
+
+    /**
+     * ending point of vector on _startX plane
+     */
+    public double getEndingX()
+    {
+        return _endX;
+    }
+
+    public void setEndingX(double _endX)
+    {
+        this._endX = _endX;
+    }
+
+    /**
+     * ending point of vector on _startX plane
+     */
+    public double getEndingY()
+    {
+        return _endY;
+    }
+
+    public void setEndingY(double _endY)
+    {
+        this._endY = _endY;
+    }
+
+    public void setMagnitude(double magnitude)
+    {
+        this._magnitude = magnitude;
     }
 
     /**
@@ -124,13 +186,13 @@ public abstract class GameObject
     public double distanceBetweenCentersOfBalls(GameObject otherBall)
     {
         // calculate delta X
-        double deltaXSquared = this.getX() - otherBall.getX();
+        double deltaXSquared = this.getStartingX() - otherBall.getStartingX();
 
         // square delta X
         deltaXSquared *= deltaXSquared;
 
         // calculate delta Y
-        double deltaYSquared = this.getY() - otherBall.getY();
+        double deltaYSquared = this.getStartingY() - otherBall.getStartingY();
 
         // square delta Y
         deltaYSquared *= deltaYSquared;
