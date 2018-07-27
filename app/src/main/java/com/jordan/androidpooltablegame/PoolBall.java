@@ -65,7 +65,7 @@ public class PoolBall extends GameObject
                 System.out.println("In PoolBall - setPoolBallLocation(), cue ball.  ");
 
                 this.setX(460);
-                this.setY(100);
+                this.setY(300);
                 break;
             }
             case R.string.one_ball:
@@ -73,21 +73,21 @@ public class PoolBall extends GameObject
                 System.out.println("In PoolBall - setPoolBallLocation(), one ball.  ");
 
                 this.setX(230);
-                this.setY(100);
+                this.setY(300);
             }
             case R.string.two_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), two ball.  ");
 
                 this.setX(200);
-                this.setY(90);
+                this.setY(200);
             }
             case R.string.three_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), three ball.  ");
 
                 this.setX(200);
-                this.setY(110);
+                this.setY(250);
             }
             case R.string.four_ball:
             {
