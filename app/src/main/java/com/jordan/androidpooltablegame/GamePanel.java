@@ -5,14 +5,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.util.ArrayList;
-import java.util.Random;
+import static java.lang.Math.sqrt;
 
 // top left corner of landscape/profile screen is origin (0,0)
 // (0, max y) is bottom left
@@ -132,6 +130,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
                 this._player.setIsUp(true);
 
                 this._cueBall.setIsCueStruck(true);
+
+                this.collisionDetection(this._cueBall, this._oneBall);
             }
             else
             {
@@ -164,6 +164,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             System.out.println("In GamePanel - onTouchEvent(), app determined: ACTION_UP. " +
                     "player has lifted finger off screen.  ");
 
+            this._cueBall.setEndingX(touchEvent.getX());
+            this._cueBall.setEndingY(touchEvent.getY());
+
+            //capture the distance that the cue ball covered
+            this._cueBall.setMagnitude();
+
             this._player.setIsUp(false);
 
             this._cueBall.setIsCueStruck(false);
@@ -175,8 +181,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         // let's capture the beginning and end of the gesture to obtain the vector's magnitude
         if (touchEvent.getAction() == MotionEvent.ACTION_POINTER_DOWN)
         {
-            //capture the distance that the cue ball covered
-            this._cueBall.setMagnitude(touchEvent.AXIS_DISTANCE);
+            this._cueBall.setStartingX(touchEvent.getX());
+            this._cueBall.setStartingY(touchEvent.getY());
 
             System.out.println("In GamePanel - onTouchEvent(), ACTION_POINTER_DOWN the cue ball " +
                     "magnitude is" + this._cueBall.getMagnitude());
@@ -284,8 +290,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         paint.setTextSize(30);
         paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
 
-        canvas.drawText("DISTANCE: " + (this._player.getScore() * 3), 10, this.BACKGROUND_IMAGE_HEIGHT - 10, paint);
-        canvas.drawText("BEST: " + this._bestDistance, this.BACKGROUND_IMAGE_WIDTH - 215, this.BACKGROUND_IMAGE_HEIGHT - 10, paint);
+//        canvas.drawText("DISTANCE: " + (this._player.getScore() * 3), 10, this.BACKGROUND_IMAGE_HEIGHT - 10, paint);
+//        canvas.drawText("BEST: " + this._bestDistance, this.BACKGROUND_IMAGE_WIDTH - 215, this.BACKGROUND_IMAGE_HEIGHT - 10, paint);
 
         if (this._player.getIsPlaying() == false && this._isNewGameCreated == true &&
                 this._isGameReset == true)
@@ -442,13 +448,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     public boolean didBallCollideWithStationaryBall(GameObject a, GameObject b)
     {
         // calculate delta X
-        double deltaXSquared = a.getX() - b.getX();
+        double deltaXSquared = a.getStartingX() - b.getStartingX();
 
         // square delta X
         deltaXSquared *= deltaXSquared;
 
         // calculate delta X
-        double deltaYSquared = a.getY() - b.getY();
+        double deltaYSquared = a.getStartingY() - b.getStartingY();
 
         // square delta Y
         deltaYSquared *= deltaYSquared;
@@ -471,6 +477,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     /**
      * https://www.gamasutra.com/view/feature/131424/pool_hall_lessons_fast_accurate_.php?page=2
+     * https://en.wikipedia.org/wiki/Euclidean_vector#Length
+     * https://www.mathsisfun.com/algebra/vectors-dot-product.html
      *
      * @param poolBallA
      * @param poolBallB
@@ -478,6 +486,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
      */
     public boolean collisionDetection(GameObject poolBallA, GameObject poolBallB)
     {
+        System.out.println("In GamePanel - collisionDetection(), System will determine whether pool balls collide.");
+
         // Early Escape test: if the length of the movingBallVector is less
         // than distance between the centers of these circles minus
         // their radii, there's no way they can hit.
@@ -491,74 +501,80 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         {
             return false;
         }
-//
-//        // Normalize the movingBallVector
-//        Vector N = movingBallVector.copy();
-//
-//        N.normalize();
-//
-//        // Find C, the vector from the center of the moving
-//        // circle A to the center of B
-//        Vector C = B.center.minus(A.center);
-//
-//        // D = N . C = ||C|| * cos(angle between N and C)
-//        double D = N.dot(C);
-//
-//        // Another early escape: Make sure that A is moving
-//        // towards B! If the dot product between the movingBallVector and
-//        // B.center - A.center is less that or equal to 0,
-//        // A isn't isn't moving towards B
-//        if (D <= 0)
-//        {
-//            return false;
-//        }
-//
-//        // Find the length of the vector C
-//        double lengthC = C.Magnitude();
-//
-//        double F = (lengthC * lengthC) - (D * D);
-//
-//        // Escape test: if the closest that A will get to B
-//        // is more than the sum of their radii, there's no
-//        // way they are going collide
-//        double sumRadiiSquared = sumRadiiOfBalls * sumRadiiOfBalls;
-//        if (F >= sumRadiiSquared)
-//        {
-//            return false;
-//        }
-//
-//        // We now have F and sumRadii, two sides of a right triangle.
-//        // Use these to find the third side, sqrt(T)
-//        double T = sumRadiiSquared - F;
-//
-//        // If there is no such right triangle with sides length of
-//        // sumRadii and sqrt(f), T will probably be less than 0.
-//        // Better to check now than perform a square root of a
-//        // negative number.
-//        if (T < 0)
-//        {
-//            return false;
-//        }
-//
-//        // Therefore the distance the circle has to travel along
-//        // movingBallVector is D - sqrt(T)
-//        double distance = D - sqrt(T);
-//
-//        // Get the magnitude of the movement vector
-//        double mag = movingBallVector.Magnitude();
-//
-//        // Finally, make sure that the distance A has to move
-//        // to touch B is not greater than the magnitude of the
-//        // movement vector.
-//        if (mag < distance)
-//        {
-//            return false;
-//        }
-//
-//        // Set the length of the movingBallVector so that the circles will just
-//        // touch
-//        movingBallVector.normalize();
-//        movingBallVector.times(distance);
+
+        // Normalize the movingBallVector
+        // A unit vector is any vector with a length of one; normally unit vectors are used simply
+        // to indicate direction. A vector of arbitrary length can be divided by its length to
+        // create a unit vector. This is known as normalizing a vector.
+        Vector normalizedVector = new Vector(poolBallA.getStartingX(), poolBallA.getStartingY(), poolBallA.getEndingX(), poolBallA.getEndingY());
+
+        normalizedVector.normalize();
+
+        // Find C, the vector from the center of the moving
+        // circle A to the center of B
+        Vector centerOfBallsVector = new Vector(poolBallA.getStartingX(), poolBallA.getStartingY(), poolBallB.getStartingX(), poolBallB.getStartingY());
+
+        centerOfBallsVector.setMagnitude();
+
+        // alternative calc 1: dotProduct = N . C = ||C|| * cos(angle between N and C)
+        // alternative calc 2: dotProduct = a · b = ax × bx + ay × by
+
+        double dotProduct = (centerOfBallsVector.getEndingX() - centerOfBallsVector.getStartingX()) * (normalizedVector.getEndingX() - normalizedVector.getStartingX()) + (centerOfBallsVector.getEndingY() - centerOfBallsVector.getStartingY()) * (normalizedVector.getEndingY() - normalizedVector.getStartingY());
+
+        // Another early escape: Make sure that A is moving
+        // towards B! If the dot product between the movingBallVector and
+        // B.center - A.center is less that or equal to 0,
+        // A isn't isn't moving towards B
+        if (dotProduct <= 0)
+        {
+            return false;
+        }
+
+        // we've formed a right triangle with centerOfBallsVector and dotProduct
+        //now we calculate the third side, from dotProduct to center of ball B
+        double thirdSideLength = (centerOfBallsVector.getMagnitude() * centerOfBallsVector.getMagnitude()) - (dotProduct * dotProduct);
+
+        // Escape test: if the closest that A will get to B
+        // is more than the sum of their radii, there's no
+        // way they are going collide
+        double sumRadiiSquared = sumRadiiOfBalls * sumRadiiOfBalls;
+
+        if (thirdSideLength >= sumRadiiSquared)
+        {
+            return false;
+        }
+
+        // We now have thirdSideLength and sumRadii, two sides of a right triangle.
+        // Use these to find the third side, sqrt(T) of a triangle where the moving ball touches
+        // pool Ball B, from the center of moving ball to perpendicular to the
+        //center of poolBall B
+        double squareOf3rdSide = sumRadiiSquared - thirdSideLength;
+
+        // If there is no such right triangle with sides length of
+        // sumRadii and sqrt(f), T will probably be less than 0.
+        // Better to check now than perform a square root of a
+        // negative number.
+        if (squareOf3rdSide < 0)
+        {
+            return false;
+        }
+
+        // Therefore the distance the circle has to travel along
+        // movingBallVector is dotProduct - sqrt(squareOf3rdSide)
+        double distance = dotProduct - sqrt(squareOf3rdSide);
+
+        // Finally, make sure that the distance A has to move
+        // to touch B is not greater than the magnitude of the
+        // movement vector.
+        if (normalizedVector.getMagnitude() < distance)
+        {
+            return false;
+        }
+
+        // Set the length of the movingBallVector so that the circles will just
+        // touch
+        normalizedVector.normalize();
+        normalizedVector.times(distance);
 
         return true;
     }
