@@ -79,21 +79,21 @@ public class PoolBall extends GameObject
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), two ball.  ");
 
-                this.setX(95);
-                this.setY(85);
+                this.setX(200);
+                this.setY(90);
             }
             case R.string.three_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), three ball.  ");
 
-                this.setX(95);
-                this.setY(95);
+                this.setX(200);
+                this.setY(110);
             }
             case R.string.four_ball:
             {
                 System.out.println("In PoolBall - setPoolBallLocation(), four ball.  ");
 
-                this.setX(85);
+                this.setX(100);
                 this.setY(100);
             }
             case R.string.five_ball:
